@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_BusinessEntities\ICICIBANK_HOMELOANS_BusinessEntities.csproj" />
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_Repositories\ICICIBANK_HOMELOANS_Repositories.csproj" />
+  </ItemGroup>
+
 </Project>
