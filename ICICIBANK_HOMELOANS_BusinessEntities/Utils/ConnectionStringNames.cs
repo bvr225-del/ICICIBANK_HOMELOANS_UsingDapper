@@ -9,5 +9,6 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
     public static class ConnectionStringNames
     {
         public static string hotelmanagementsqlconnectionstring = "ConnectionStrings:hotelmanagementsqlconnectionstring";
+        public static string midlandsqlconnectionstring = "ConnectionStrings:midlandsqlconnectionstring";
     }
 }
