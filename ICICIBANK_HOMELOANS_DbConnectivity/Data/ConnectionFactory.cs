@@ -24,5 +24,12 @@ namespace ICICIBANK_HOMELOANS_DbConnectivity.Data
             return con;
 
         }
+
+        public SqlConnection midlandsqlconnectionstring()
+        {
+            var connectionString = Convert.ToString(_configuration.GetSection(ConnectionStringNames.midlandsqlconnectionstring).Value);
+            SqlConnection con = new SqlConnection(connectionString);
+            return con;
+        }
     }
 }

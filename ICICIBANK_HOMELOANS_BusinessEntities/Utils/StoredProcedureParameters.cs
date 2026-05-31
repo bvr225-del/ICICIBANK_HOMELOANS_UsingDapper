@@ -14,5 +14,12 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
         public static string empsalary = "@empsalary";
         public static string employeeInsertedId = "@insertvalue";
         #endregion
+
+        #region Orders stored procedure parameters
+        public static string orderid = "@orderid";
+        public static string ordername = "@ordername";
+        public static string orderlocation = "@orderlocation";
+        public static string orderInsertedId = "@insertvalue";
+        #endregion
     }
 }
