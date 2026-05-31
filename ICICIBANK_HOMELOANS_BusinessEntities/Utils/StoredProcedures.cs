@@ -31,5 +31,13 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
         public static string UpdateDepartment = "Usp_UpdateDepartment";
         public static string DeleteDepartment = "Usp_DeleteDepartment";
         #endregion
+
+        #region Restaurant stored procedures
+            public static string GetRestaurants = "Usp_GetRestaurant";
+            public static string GetRestaurantById = "Usp_GetRestaurantById";
+            public static string AddRestaurant = "Usp_AddRestaurant";
+            public static string UpdateRestaurant = "Usp_UpdateRestaurant";
+            public static string DeleteRestaurant = "Usp_DeleteRestaurant";
+        #endregion
     }
 }

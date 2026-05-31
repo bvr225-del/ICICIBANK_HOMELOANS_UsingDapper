@@ -28,5 +28,13 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
         public static string deptlocation = "@deptlocation";
         public static string departmentInsertedId = "@insertvalue";
         #endregion
+
+        #region Restaurant stored procedure parameters
+        public static string restaurantid = "@Id";
+        public static string restaurantname = "@RestaurantName";
+        public static string restaurantlocation = "@RestaurantLocation";
+        public static string creationDate = "@CreationDate";
+        public static string restaurantInsertedId = "@insertvalue";
+        #endregion
     }
 }
