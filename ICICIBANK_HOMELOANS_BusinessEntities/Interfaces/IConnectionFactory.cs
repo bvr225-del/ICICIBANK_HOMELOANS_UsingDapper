@@ -10,5 +10,6 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Interfaces
     public interface IConnectionFactory
     {
         SqlConnection hotelmanagementsqlconnectionstring();
+        SqlConnection midlandsqlconnectionstring();
     }
 }

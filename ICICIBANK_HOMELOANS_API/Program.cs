@@ -17,6 +17,9 @@ builder.Services.AddSingleton<IConnectionFactory, ConnectionFactory>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 //===========================================================================
+builder.Services.AddScoped<IOrderRepository, OrdersRepository>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
+//===========================================================================
 
 #region AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

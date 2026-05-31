@@ -16,6 +16,8 @@ namespace ICICIBANK_HOMELOANS_Services.AutoMapper
             // Define your mappings here
             CreateMap<EmployeeDto, Employee>();
             CreateMap<Employee, EmployeeDto>();
+            CreateMap<OrdersDto, Orders>();
+            CreateMap<Orders, OrdersDto>();
         }
     }
 }
