@@ -10,4 +10,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_BusinessEntities\ICICIBANK_HOMELOANS_BusinessEntities.csproj" />
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_DbConnectivity\ICICIBANK_HOMELOANS_DbConnectivity.csproj" />
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_Repositories\ICICIBANK_HOMELOANS_Repositories.csproj" />
+    <ProjectReference Include="..\ICICIBANK_HOMELOANS_Services\ICICIBANK_HOMELOANS_Services.csproj" />
+  </ItemGroup>
+
 </Project>
