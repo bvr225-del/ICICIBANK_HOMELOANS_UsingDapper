@@ -31,5 +31,12 @@ namespace ICICIBANK_HOMELOANS_DbConnectivity.Data
             SqlConnection con = new SqlConnection(connectionString);
             return con;
         }
+
+        public SqlConnection Northwind_DbConnectionString()
+        {
+            var connectionString = Convert.ToString(_configuration.GetSection(ConnectionStringNames.Northwind_DbConnectionString).Value);
+            SqlConnection con = new SqlConnection(connectionString);
+            return con;
+        }
     }
 }
