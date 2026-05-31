@@ -13,5 +13,6 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Interfaces
         SqlConnection midlandsqlconnectionstring();
 
         SqlConnection Northwind_DbConnectionString();
+        SqlConnection Restaurant_DbConnectionString();
     }
 }

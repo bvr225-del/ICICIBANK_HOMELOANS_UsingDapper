@@ -23,6 +23,9 @@ builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 //===========================================================================
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+//============================================================================
 
 #region AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
