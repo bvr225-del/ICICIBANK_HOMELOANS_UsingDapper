@@ -38,5 +38,12 @@ namespace ICICIBANK_HOMELOANS_DbConnectivity.Data
             SqlConnection con = new SqlConnection(connectionString);
             return con;
         }
+
+        public SqlConnection Restaurant_DbConnectionString()
+        {
+            var connectionString = Convert.ToString(_configuration.GetSection(ConnectionStringNames.Restaurant_DbConnectionString).Value);
+            SqlConnection con = new SqlConnection(connectionString);
+            return con;
+        }
     }
 }
