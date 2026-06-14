@@ -2,6 +2,7 @@
 using ICICIBANK_HOMELOANS_BusinessEntities.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace ICICIBANK_HOMELOANS_API.Controllers
 {
@@ -10,103 +11,149 @@ namespace ICICIBANK_HOMELOANS_API.Controllers
     public class RestaurantController : ControllerBase
     {
         private readonly IRestaurantService _restaurantService;
-        public RestaurantController(IRestaurantService restaurantService)
+        private readonly ILoggingFactory _loggerFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public RestaurantController(IRestaurantService restaurantService, ILoggingFactory loggerFactory, IHttpContextAccessor httpContextAccessor)
         {
             _restaurantService = restaurantService;
+            _loggerFactory = loggerFactory;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpPost]
         [Route("AddRestaurant")]
         public async Task<IActionResult> AddRestaurant(RestaurantDto restaurantDto)
         {
-            try
-            {
-                if (!ModelState.IsValid)
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("UserName")?.Value ?? "Unknown";
+
+            #region serilog
+            Log.Information($"RestaurantController:AddRestaurant API method execution started and Current Loggedin username:{userName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant Name:{restaurantDto.RestaurantName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant Location:{restaurantDto.RestaurantLocation}");
+            #endregion
+            #region database log
+            await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:AddRestaurant API method execution started");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant Name:{restaurantDto.RestaurantName}");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant Location:{restaurantDto.RestaurantLocation}");
+            #endregion
+
+            if (!ModelState.IsValid)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "invalid data");
                 }
                 else
                 {
                     int insertedId = await _restaurantService.AddRestaurant(restaurantDto);
-                    return StatusCode(StatusCodes.Status201Created, "created successfully");
+                Log.Information("RestaurantController:AddRestaurant API method execution ended successfully");
+                await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:AddRestaurant API method execution ended successfully");
+
+                return StatusCode(StatusCodes.Status201Created, "created successfully");
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "internal error occurred");
-            }
 
         }
         [HttpDelete]
         [Route("DeleteRestaurant/{Id}")]
         public async Task<IActionResult> DeleteRestaurant(int Id)
         {
-            try
-            {
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("UserName")?.Value ?? "Unknown";
 
-                bool result = await _restaurantService.DeleteRestaurant(Id);
+            #region serilog
+            Log.Information($"RestaurantController:DeleteRestaurantById API method execution started and Current Loggedin username:{userName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant ID:{Id}");
+            #endregion
+            #region database log
+            await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:DeleteRestaurantById API method execution started");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant ID:{Id}");
+            #endregion
+
+            bool result = await _restaurantService.DeleteRestaurant(Id);
                 if (result)
                 {
-                    return StatusCode(StatusCodes.Status200OK, "deleted successfully");
+                Log.Information("RestaurantController:DeleteRestaurantById API method execution ended successfully");
+                await _loggerFactory.AddLoggingMessages("venkat", "information", "RestaurantController:DeleteRestaurantById API method execution ended successfully");
+                return StatusCode(StatusCodes.Status200OK, "deleted successfully");
                 }
                 else
                 {
                     return StatusCode(StatusCodes.Status404NotFound, "restaurant not found");
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "internal error occurred");
-            }
         }
         [HttpGet]
         [Route("GetRestaurantById/{restaurantid}")]
         public async Task<IActionResult> GetRestaurantById(int restaurantid)
         {
-            try
-            {
-                var restaurant = await _restaurantService.GetRestaurantById(restaurantid);
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("UserName")?.Value ?? "Unknown";
+
+            #region serilog
+            Log.Information($"RestaurantController:GetRestaurantById API method execution started and Current Loggedin username:{userName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant ID:{restaurantid}");
+            #endregion
+            #region database log
+            await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:GetRestaurantById API method execution started");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant ID:{restaurantid}");
+            #endregion
+
+
+            var restaurant = await _restaurantService.GetRestaurantById(restaurantid);
                 if (restaurant != null)
                 {
-                    return StatusCode(StatusCodes.Status200OK, restaurant);
+                Log.Information("RestaurantController:GetRestaurantById API method execution ended successfully");
+                await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:GetRestaurantById API method execution ended successfully");
+
+                return StatusCode(StatusCodes.Status200OK, restaurant);
                 }
                 else
                 {
                     return StatusCode(StatusCodes.Status404NotFound, "restaurant not found");
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "internal error occurred");
-            }
         }
         [HttpGet]
         [Route("GetRestaurants")]
         public async Task<IActionResult> GetRestaurants()
         {
-            try
-            {
-                var restaurants = await _restaurantService.GetRestaurants();
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("UserName")?.Value ?? "Unknown";
+
+            #region serilog
+            Log.Information($"RestaurantController:GetRestaurants API method execution started and Current Loggedin username:{userName}");
+            #endregion
+            #region database log
+            await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:GetRestaurants API method execution started");
+            #endregion
+
+
+            var restaurants = await _restaurantService.GetRestaurants();
                 if (restaurants != null && restaurants.Count > 0)
                 {
-                    return StatusCode(StatusCodes.Status200OK, restaurants);
+                Log.Information("RestaurantController:GetRestaurants API method execution ended successfully");
+                await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:GetRestaurants API method execution ended successfully");
+
+                return StatusCode(StatusCodes.Status200OK, restaurants);
                 }
                 else
                 {
                     return StatusCode(StatusCodes.Status404NotFound, "no restaurant data found");
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "internal error occurred");
-            }
         }
         [HttpPut]
         [Route("UpdateRestaurant")]
         public async Task<IActionResult> UpdateRestaurant(RestaurantDto restaurantDto)
         {
-            try
-            {
-                if (!ModelState.IsValid)
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("UserName")?.Value ?? "Unknown";
+
+            #region serilog
+            Log.Information($"RestaurantController:UpdateRestaurant API method execution started and Current Loggedin username:{userName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant ID:{restaurantDto.Id}");
+            Log.Information($"RestaurantController:called input parameter Restaurant Name:{restaurantDto.RestaurantName}");
+            Log.Information($"RestaurantController:called input parameter Restaurant Location:{restaurantDto.RestaurantLocation}");
+            #endregion
+            #region database log
+            await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:UpdateRestaurant API method execution started");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant ID:{restaurantDto.Id}");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant Name:{restaurantDto.RestaurantName}");
+            await _loggerFactory.AddLoggingMessages(userName, "information", $"RestaurantController:called input parameter Restaurant Location:{restaurantDto.RestaurantLocation}");
+            #endregion
+
+            if (!ModelState.IsValid)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "invalid data");
                 }
@@ -119,14 +166,12 @@ namespace ICICIBANK_HOMELOANS_API.Controllers
                     }
                     else
                     {
-                        return StatusCode(StatusCodes.Status200OK, "updated successfully");
+                    Log.Information("RestaurantController:UpdateRestaurant API method execution ended successfully");
+                    await _loggerFactory.AddLoggingMessages(userName, "information", "RestaurantController:UpdateRestaurant API method execution ended successfully");
+
+                    return StatusCode(StatusCodes.Status200OK, "updated successfully");
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "internal error occurred");
-            }
         }
     }
 }

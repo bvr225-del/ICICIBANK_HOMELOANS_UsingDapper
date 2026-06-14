@@ -154,7 +154,7 @@ namespace ICICIBANK_HOMELOANS_API.Controllers
             await _loggingFactory.AddLoggingMessages(userName, "information", $"Employee Controller:GetEmployees API method Execution Started and Current Loggedin username:{userName}");
             #endregion
 
-            throw new Exception("Custom Exception:Employee Controller:GetEmployees API method failed");
+            //throw new Exception("Custom Exception:Employee Controller:GetEmployees API method failed");
 
             var result = await _employeeService.GetEmployees();
             if (result == null || result.Count == 0)
