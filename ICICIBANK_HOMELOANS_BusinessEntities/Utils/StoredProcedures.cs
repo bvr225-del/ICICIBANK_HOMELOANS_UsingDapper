@@ -39,5 +39,27 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
             public static string UpdateRestaurant = "Usp_UpdateRestaurant";
             public static string DeleteRestaurant = "Usp_DeleteRestaurant";
         #endregion
+
+        #region ProjectLevelLog Stored Procedures
+        public static string AddLoggingMessages = "Usp_ProjectLevelLog";
+        #endregion
+
+        #region ProjectLevelErrorLog Stored Procedures
+        public static string AddProjectLevelErrorLog = "Usp_AddProjectLevelErrorlog";
+        #endregion
+
+        #region TokenBasedAuthentication storedprocedures
+        public static readonly string GetUserRolesInformation = "Usp_GetUserRolesInformation";
+
+        public static readonly string SignIn = "Usp_LoginCheck";
+
+        public static readonly string Usp_UserResgistration = "Usp_UserResgistration";
+
+        public static readonly string Usp_RolesResgistration = "Usp_RolesResgistration";
+
+        public static readonly string Usp_UserRolesMapping = "Usp_UserRolesMapping";
+
+        #endregion
+
     }
 }

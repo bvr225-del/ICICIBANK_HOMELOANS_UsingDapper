@@ -36,5 +36,20 @@ namespace ICICIBANK_HOMELOANS_BusinessEntities.Utils
         public static string creationDate = "@CreationDate";
         public static string restaurantInsertedId = "@insertvalue";
         #endregion
+
+        #region ProjectLevelLog Parameters
+        public static string Username = "@username";
+        public static string LogLevel = "@LogLevel";
+        public static string MessageTemplate = "@MessageTemplate";
+        #endregion
+
+        #region ProjectLevelErrorLog Parameters
+        public static string StatusCode = "@StatusCode";
+        public static string ErrorMessage = "@ErrorMessage";
+        public static string StackTraceError = "@StackTraceError";
+        public static string InnerExceptionError = "@InnerExceptionError";
+        public static string UserName = "@UserName";
+        #endregion
+
     }
 }
