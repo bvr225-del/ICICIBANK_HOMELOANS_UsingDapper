@@ -79,6 +79,17 @@ builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddScoped<IAuthenticateRepository, AuthenticateRepository>();
 builder.Services.AddScoped<IAuthenticateService, AuthenticateService>();
 //=====================
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactAppPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 
 #region AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -89,16 +100,25 @@ app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();//Registering the  Custom Middleware to appliction pipeline like this way.
 
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseAuthentication();//This is predefined Middleware,created by the Microsoft team to handle the Authentication in the api.
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseRouting();
+
+// Use CORS policy
+app.UseCors("ReactAppPolicy");
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
