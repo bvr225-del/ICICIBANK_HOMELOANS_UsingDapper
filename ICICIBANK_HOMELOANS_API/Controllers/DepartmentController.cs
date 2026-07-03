@@ -10,7 +10,7 @@ namespace ICICIBANK_HOMELOANS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService _departmentService;
